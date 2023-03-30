@@ -7,11 +7,6 @@ app.get("/", (req, res, next) => {
   next();
 });
 
-app.get("/api/books", (req, res, next) => {
-  res.send(["rich daddy poor daddy", "goods to great", "nodejs", "javScirpt"]);
-  next();
-});
-
 // ! req.params
 app.get("/api/books/:id", (req, res) => {
   res.send(req.params.id); // "/api/books/req.params.id"          id = req.params.id
@@ -22,11 +17,7 @@ app.get("/api/books/id/:bookID", (req, res) => {
 });
 
 app.get("/api/books/articles/:year/:month", (req, res) => {
-  // res.send(req.params); // year ve month doner bize           {"year": "2022",  "month": "04"}
-  // ! query string params     =      ?name=Suleyman&surName=Basir
-  // ? query string param her zaman soru isareti ile baslar  "?id=12" gib gibi
-  // ? req.query calismasi icin req.paramsi kommente aldik
-  res.send(req.query); // {"name": "Ebubekir"}         monthdan sonra biz  /api/books/articles/:year/:month?name=Ebubekir yazdik ve bize queryi dondu
+  res.send(req.params); // year ve month doner bize           {"year": "2022",  "month": "04"}
 });
 
 // set port=5001 dersem portum 5001 baslatilir set bu default programin kendi global metodudur

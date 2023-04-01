@@ -1,3 +1,6 @@
+// Not = > Backende gelen her hangi bi sorgulari control etmek lazim yani validation
+// ! her bir seyi control etmek icin teker teker controllar yazmaktansa biz burda JOI npm paketinden faydalandik
+
 require("dotenv").config();
 const express = require("express");
 const Joi = require("joi");
@@ -23,10 +26,12 @@ app.get("/api/books", (req, res, next) => {
 });
 
 app.post("/api/books", (req, res) => {
-  const bookSchema = Joi.object({
+
+const bookSchema = Joi.object({
     name: Joi.string().required().min(3),
   });
-  const result = bookSchema.validate(req.body);
+
+const result = bookSchema.validate(req.body);
   if (result.error) {
     res.status(400).send(result.error.details[0].message);
     return;
@@ -46,19 +51,6 @@ app.post("/api/books", (req, res) => {
   };
   books.push(book);
   res.status(201).send(book);
-});
-
-// ! req.params
-app.get("/api/books/:id", (req, res) => {
-  const book = books.find((b) => b.id === parseInt(req.params.id));
-  if (!book) {
-    res.status(404).send("sorry we cant find u re book");
-  }
-  res.send(book);
-});
-
-app.get("/api/books/articles/:year/:month", (req, res) => {
-  res.send(req.query);
 });
 
 // set port=5001 dersem portum 5001 baslatilir set bu default programin kendi global metodudur

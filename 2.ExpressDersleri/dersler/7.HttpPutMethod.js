@@ -64,17 +64,6 @@ app.put("/api/books/:id", (req, res) => {
   // kitobni qaytarish
   res.send(book);
 });
-app.delete("/api/books/:id", (req, res) => {
-  // kitobni id boyicha topamiza
-  // agar topilmasa 404 hatosi qaytaramiza
-  const book = books.find((b) => b.id === parseInt(req.params.id));
-  if (!book) return res.status(404).send("sorry we cant find u re book");
-
-  // topilsa uni ochirib tashimiza
-  const bookIndex = books.indexOf(book);
-  books.splice(bookIndex, 1);
-  res.send(book);
-});
 
 function validateBook(book) {
   const bookSchema = Joi.object({
